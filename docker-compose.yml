@@ -1,0 +1,26 @@
+nginx:    
+      build: ./nginx/  
+      container_name: nginx-container  
+      ports:  
+       - 80:80  
+      links:  
+       - php  
+      volumes:  
+      - ./app:/var/www/html/
+php:    
+      build: ./php/  
+      container_name: php-container  
+      expose:  
+       - 9000  
+      links:  
+       - mysql  
+      volumes:  
+       - ./app:/var/www/html/
+mysql:    
+      image: mysql:5.7  
+      container_name: mysql-container  
+      environment:  
+       MYSQL_ROOT_PASSWORD: secret  
+       MYSQL_DATABASE: housekeeping  
+       MYSQL_USER: admin        
+       MYSQL_PASSWORD: redhat@123 
